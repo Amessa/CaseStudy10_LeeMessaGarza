@@ -1,4 +1,39 @@
 #################################################################################
+#  2.2 Correlation between As Is and Plan data                                  #
+#################################################################################
+
+# Test the correlation between As Is and Plan data in order to test how exact 
+# the planning is. 
+# Correlation is a measure of linear relationship between two variables. 
+
+# The results show a very high planning accuracy. 
+
+TotalAsIs_lm <- lm(TotalAsIs ~ TotalPlan , data = TotalAsIs)
+summary(TotalAsIs_lm)
+
+TotalAsIs_tslm <- tslm(TotalAsIs ~ TotalPlan )
+summary(TotalAsIs_tslm)
+
+#################################################################################
+#  2.3 Time series analysis                                                     #
+#################################################################################
+
+#################################################################################
+#  2.3.1 "stl" function                                                         #
+#################################################################################
+
+# The time series can be analysed using the stl function in order to seperate
+# the trend, seasonality and remainder (remaining coincidential) components from
+# one another.
+
+TotalAsIs_stl <- stl(TotalAsIs, s.window=5)
+EfakAsIs_stl <- stl(EfakAsIs , s.window=5)
+WugeAsIs_stl <- stl(WugeAsIs, s.window=5)
+TotalEtelAsIs_stl <- stl(TotalEtelAsIs, s.window=5)
+BlueEtelAsIs_stl <- stl(BlueEtelAsIs , s.window=5)
+RedEtelAsIs_stl <- stl(RedEtelAsIs , s.window=5)
+
+#################################################################################
 ###                                                                           ###
 ###  3. Correlation of different external indicators                          ###
 ###                                                                           ###
