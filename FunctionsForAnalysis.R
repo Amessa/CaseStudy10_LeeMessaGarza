@@ -303,8 +303,6 @@ summary(TotalAsIsWithoutNovDec2013)
 # in a matrix.
 
 # Establish the standardised data matrix
-
-IndicatorsmatrixStandardised=scale(IndicatorsMatrix)
 IndicatorsmatrixStandardised
 
 # The dimensions of the matrix are determined by the number of indicators.

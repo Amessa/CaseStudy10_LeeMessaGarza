@@ -6,7 +6,6 @@ output:
   html_document:
     keep_md: TRUE
 ---
-<<<<<<< HEAD
 # Introduction
 
 ### Add introduction here
@@ -248,173 +247,250 @@ cor(RedEtelAsIs , InfluenceNationalHolidays)
 
 This indicator is an experiment where the influence of National Holidays is extended into the months leading up to the holiday. However later tests show that this indicator is no better for forecasting than the orignial National Holidays indicator.   
 
+## Correlation of the indicators with each another 
+
+```{r}
+IndicatorsmatrixStandardised
+```
+
+Establish the standardised data matrix
+
+```{r}
+NumberOfIndicators
+```
+
+The dimensions of the matrix are determined by the number of indicators.
+
+```{r}
+IndicatorsCorrelationCoefficientMatrix
+```
+
+Produce the IndicatorsCorrelationCoefficientMatrix.
+
+## ModelWithAlllIndicators and With Each Indicator Individually
+
+### All Indiators in one model:
+
+```{r}
+summary(ModelWithAlllIndicators)
+```
+
+### CEPI:
+
+```{r}
+summary(ModelWithCEPI)
+```
+
+The CEPI Indicator correlated best with total exports. Indeed the multiple R² improved the model slighltly compared to the simple ModelWithTrendAndSeasonalityOnly. However, the adjusted R² remains the same.
 
 
+### SIGov:
 
+```{r}
+summary(ModelWithSIGov) 
+```
+   
+The Satisfaction Index (gov)  hardly changes the function of the model.
+
+### Temperature:
+
+```{r}
+summary(ModelWithTemperature)
+```
+
+### Births:
+
+```{r}
+summary(ModelWithBirths) 
+```
+
+### SIExtern:
+
+```{r}
+summary(ModelWithSIExtern) 
+```
+
+### UrbanoExports:
+
+```{r}
+summary(ModelWithTotalUrbanoExports) 
+```
+
+Indicator with adjusted R² shows a better result than the reference model (ModelWithTrendAndSeasonalityOnly). The individual months are also very significant.
+
+### GlobalisationPartyMembers:
+
+```{r}
+summary(ModelWithGlobalisationPartyMembers) 
+```
+
+### AEPI:
+
+```{r}
+summary(ModelWithAEPI)
+```
+
+### PPIEtel:
+```{r}
+summary(ModelWithPPIEtel)
+```
+
+
+### NationalHolidays:
+```{r}
+summary(ModelWithNationalHolidays)
+```
+
+### ChulwalarIndex:
+
+```{r}
+summary(ModelWithChulwalarIndex) 
+```
+
+### Inflation:
+
+```{r}
+summary(ModelWithInflation)
+```
+
+### IndependenceDayPresents:
+
+```{r}
+summary(ModelWithIndependenceDayPresents)
+```
+
+### InfluenceNationalHolidays:
+
+```{r}
+summary(ModelWithInfluenceNationalHolidays)
+```
+
+Indicator with the best adjusted R². The months remain very significant and the indicator itself has a p-value of 0.00636
+
+## *Results Summary*  
+CEPI: Adjusted R² = 0.9004  
+SIGov: Adjusted R² = 0.8994  
+Temperature: Adjusted R² = 0.8993  
+Births: Adjusted R² = 0.9088  
+SIExtern: Adjusted R² = 0.8998  
+UrbanoExports: Adjusted R² = 0.9005  
+GlobalisationPartyMembers: Adjusted R² = 0.8991  
+AEPI: Adjusted R² = 0.8999  
+PPIEtel: Adjusted R² = 0.9003  
+NationalHolidays: Adjusted R² = 0.9110  
+ChulwalarIndex: Adjusted R² = 0.9001  
+Inflation: Adjusted R² = 0.8989  
+IndependenceDayPresents: Adjusted R² = 0.8993  
+**InfluenceNationalHolidays: Adjusted R² = 0.9110**  
+
+## ModelWithHighCorrelatingIndicators 
+
+```{r}
+IndicatorsCorrelationCoefficientMatrix
+summary(ModelWithHighCorrelatingIndicators)
+```
+
+## ModelWithLowCorrelatingIndicators  
+
+```{r}
+IndicatorsCorrelationCoefficientMatrix
+summary(ModelWithLowCorrelatingIndicators)
+```
+
+## ModelWithTrendAndSeasonalityOnly
+
+```{r}
+summary(ModelWithTrendAndSeasonalityOnly)
+```
+
+## ModelWithoutTrendAndSeasonality
+
+```{r}
+summary(ModelWithoutTrendAndSeasonality)
+```
+
+## ModelWithEfakExportsIndicators
+
+```{r}
+summary(ModelWithEfakExportsIndicators)
+summary(ModelEfakSalesWithCEPI)
+summary(ModelEfakSalesWithTrendAnsSeasonalityOnly)
+summary(ModelWithCEPIOnly)
+
+```
+
+## ModelWithWugeExportsIndicators
+
+```{r}
+summary(ModelWithWugeExportsIndicators)
+summary(ModelWugeWithCEPI)
+summary(ModelWugeWithTrendAndSeasonalityOnly)
+```
+
+## ModelTotalEtel 
+
+```{r}
+summary(ModelTotalEtel)
+summary(ModelBlueEtel)
+summary(ModelRedEtel)
+```
+
+## *Results Summary*  
+ModelWithHighCorrelatingIndicators: Adjusted R² = 0,8941  
+ModelWithLowCorrelatingIndicators: Adjusted R² = 0.9097  
+ModelWithTrendAndSeasonalityOnly: Adjusted R² = 0.9004  
+ModelWithoutTrendAndSeasonality: Adjusted R² = 0.415  
+**ModelWithEfakExportsIndicators: Adjusted R² = 0.923**  
+ModelEfakSalesWithCEPI: Adjusted R² = 0.9125  
+ModelEfakSalesWithTrendAnsSeasonalityOnly: Adjusted R² = 0.8881  
+ModelWithCEPIOnly: Adjusted R² = 0.8636  
+ModelWithWugeExportsIndicators: Adjusted R² = 0.8758  
+ModelWugeWithCEPI: Adjusted R² = 0.8771  
+ModelWugeWithTrendAndSeasonalityOnly: Adjusted R² = 0.8789  
+ModelTotalEtel: Adjusted R² = 0.8683  
+ModelBlueEtel: Adjusted R² = 0.6937  
+ModelRedEtel: Adjusted R² = 0.85  
+
+
+##############################
 
 # Analysis
 
+# Case Study 10 Questions
+
+## What is the best model for the export data? 
+
+
+
+## How well does forecast meet planned exports?  
+
+This is examined using correlation between the chosen model and the planned export data of 2014. We chose the additive model (Modelhw-1) that was analyzed using Holt-Winter's seasonal method for two reasons. Firstly the plot of seasonal variation show that the variation across the time series is very much uniform. Secondly the AIC is smaller than any other models. The multiplicative model (Modelhw-1) is also a good model that we see next to the additive one. Even the multiplicative model has the smallest RMSE error. However, that solo criteria doesn't get the best model. Although our decision is to suggest the additive model we performed the correlation for both additive and multiplicative models.
+
+```{r}
+x1<-Model_hw_1_PointForecast # Additive model
+x1
+x2<-Model_hw_2_PointForecast #multiplecative model
+x2
+y<-TotalPlan_2014 #Total planned for 2014
+y
+cor(x1,y)
+cor(x2,y)
+```  
+
+```{r}
+plot(c(x1,x2),c(y,y),xlab="forcasted data",ylab="planned data",main="Forcasted vs, Planned",type="n")
+points(x1,y,col="red",pch=21,bg="red")
+points(x2,y,col="blue",pch=21,bg="blue")
+```  
+
+Both additive and multiplecative results show a very strong correlation with the planned data. The multiplicative model has even more correlation with planned data but is too conservative which might comparatively less practical.    
+
+## More than one model may be equally good. How do you choose among equally good models?
+
+
 ## Basic Plots of the As Is and Planned Data
 
-```{r, echo=FALSE}
-=======
-# Import and Prepare Data
 
-```{r}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-```{r}
-library(fpp)
-
-
-
-#################################################################################
-#   1.1 Import the exports data and the indicators                              #
-#################################################################################
-
-### !!! In order to test the script, it is necessary to change the three
-### file paths. The files have been sent together with the script!!!
-
-# The Export data for Chulwalar   are in two .csv files.
-# One file for the as is data: ImportedAsIsDataChulwalar.csv
-# and another one for the plan data: ImportedPlanDataChulwalar.csv
-
-setwd("~/Dropbox/SMUDataScienceClass/1st class/Week 10/CaseStudy10_LeeMessaGarza")
-
-ImportedAsIsData <- read.csv("ImportedAsIsDataChulwalar.csv", header = F, sep=";", fill = T) #chose ImportedAsIsDataChulwalar.csv
-
-ImportedPlanData <- read.csv("ImportedPlanDataChulwalar.csv", header = F, sep=";", fill = T) #chose ImportedPlanDataChulwalar.csv
-
-
-
-# The indicators data is also in a file: ImportedIndicatorsChulwalar.csv
-ImportedIndicators <- read.csv("ImportedIndicatorsChulwalar.csv", header = F, sep=";", fill = T) # chose ImportedIndicatorsChulwalar.csv
-
-
-TotalAsIsVector <- c(ImportedAsIsData [2:13,2],ImportedAsIsData [2:13,3],ImportedAsIsData [2:13,4],ImportedAsIsData [2:13,5],ImportedAsIsData [2:13,6],ImportedAsIsData [2:13,7])
-EfakAsIsVector <- c(ImportedAsIsData [16:27,2],ImportedAsIsData [16:27,3],ImportedAsIsData [16:27,4],ImportedAsIsData [16:27,5],ImportedAsIsData [16:27,6],ImportedAsIsData [16:27,7])
-WugeAsIsVector <- c(ImportedAsIsData [30:41,2],ImportedAsIsData [30:41,3],ImportedAsIsData [30:41,4],ImportedAsIsData [30:41,5],ImportedAsIsData [30:41,6],ImportedAsIsData [30:41,7])
-TotalEtelAsIsVector <- c(ImportedAsIsData [44:55,2],ImportedAsIsData [44:55,3],ImportedAsIsData [44:55,4],ImportedAsIsData [44:55,5],ImportedAsIsData [44:55,6],ImportedAsIsData [44:55,7])
-BlueEtelAsIsVector <- c(ImportedAsIsData [58:69,2],ImportedAsIsData [58:69,3],ImportedAsIsData [58:69,4],ImportedAsIsData [58:69,5],ImportedAsIsData [58:69,6],ImportedAsIsData [58:69,7])
-RedEtelAsIsVector <- c(ImportedAsIsData [72:83,2],ImportedAsIsData [72:83,3],ImportedAsIsData [72:83,4],ImportedAsIsData [72:83,5],ImportedAsIsData [72:83,6],ImportedAsIsData [72:83,7])
-YearAsIsVector <- c(ImportedAsIsData [86,2],ImportedAsIsData [86,3],ImportedAsIsData [86,4],ImportedAsIsData [86,5],ImportedAsIsData [86,6],ImportedAsIsData [86,7])
-TotalAsIsVector_2014 <- c(ImportedAsIsData[2:13,8])
-
-PlanVector <- c(ImportedPlanData[2:13,2],ImportedPlanData[2:13,3],ImportedPlanData[2:13,4],ImportedPlanData[2:13,5],ImportedPlanData[2:13,6],ImportedPlanData[2:13,7])
-EfakPlanVector <- c(ImportedPlanData[16:27,2],ImportedPlanData[16:27,3],ImportedPlanData[16:27,4],ImportedPlanData[16:27,5],ImportedPlanData[16:27,6],ImportedPlanData[16:27,7])
-WugePlanVector <- c(ImportedPlanData[30:41,2],ImportedPlanData[30:41,3],ImportedPlanData[30:41,4],ImportedPlanData[30:41,5],ImportedPlanData[30:41,6],ImportedPlanData[30:41,7])
-TotalEtelPlanVector <- c(ImportedPlanData[44:55,2],ImportedPlanData[44:55,3],ImportedPlanData[44:55,4],ImportedPlanData[44:55,5],ImportedPlanData[44:55,6],ImportedPlanData[44:55,7])
-BlueEtelPlanVector <- c(ImportedPlanData[58:69,2],ImportedPlanData[58:69,3],ImportedPlanData[58:69,4],ImportedPlanData[58:69,5],ImportedPlanData[58:69,6],ImportedPlanData[58:69,7])
-RedEtelPlanVector <- c(ImportedPlanData[72:83,2],ImportedPlanData[72:83,3],ImportedPlanData[72:83,4],ImportedPlanData[72:83,5],ImportedPlanData[72:83,6],ImportedPlanData[72:83,7])
-YearPlanVector <- c(ImportedPlanData[86,2],ImportedPlanData[86,3],ImportedPlanData[86,4],ImportedPlanData[86,5],ImportedPlanData[86,6],ImportedPlanData[86,7])
-PlanVector_2014 <- c(ImportedPlanData[2:13,8])
-
-# The data is saved as a vector and needs to be converted into a time series
-
-TotalAsIs<- ts(TotalAsIsVector , start=c(2008,1), end=c(2013,12), frequency=12)
-EfakAsIs <- ts(EfakAsIsVector , start=c(2008,1), end=c(2013,12), frequency=12)
-WugeAsIs <- ts(WugeAsIsVector, start=c(2008,1), end=c(2013,12), frequency=12)
-TotalEtelAsIs<- ts(TotalEtelAsIsVector, start=c(2008,1), end=c(2013,12), frequency=12)
-BlueEtelAsIs <- ts(BlueEtelAsIsVector, start=c(2008,1), end=c(2013,12), frequency=12)
-RedEtelAsIs <- ts(RedEtelAsIsVector, start=c(2008,1), end=c(2013,12), frequency=12)
-YearAsIs <- ts(YearAsIsVector, start=c(2008,1), end=c(2013,12), frequency=12)
-TotalAsIs_2014 <- ts(TotalAsIsVector_2014, start=c(2014,1), end=c(2014,12), frequency=12)
-
-TotalPlan <- ts(PlanVector , start=c(2008,1), end=c(2013,12), frequency=12)
-EfakPlan <- ts(EfakPlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-WugePlan <- ts(WugePlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-TotalEtelPlan <- ts(TotalEtelPlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-BlueEtelPlan <- ts(BlueEtelPlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-RedEtelPlan <- ts(RedEtelPlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-YearPlan <- ts(YearPlanVector, start=c(2008,1), end=c(2013,12), frequency=12)
-TotalPlan_2014 <- ts(PlanVector_2014, start=c(2014,1), end=c(2014,12), frequency=12)
-
-# Call up the time series to check everything has worked.
-
-TotalAsIs
-EfakAsIs
-WugeAsIs
-TotalEtelAsIs
-BlueEtelAsIs 
-RedEtelAsIs 
-YearAsIs
-TotalAsIs_2014
-
-TotalPlan
-EfakPlan
-WugePlan 
-TotalEtelPlan
-BlueEtelPlan
-RedEtelPlan
-YearPlan
-TotalPlan_2014
-
-```
-
-##Plot Them
-```{r}
->>>>>>> 64ead25a7a64e91a2fa8df2659f00922228ca2ef
-par(mfrow=c(3,2))
-
-plot(TotalAsIs, col="black", main="TotalAsIs")
-plot(EfakAsIs , col="red",main="EfakAsIs")
-plot(WugeAsIs, col="blue", main="WugeAsIs")
-plot(TotalEtelAsIs, col="green",main="TotalEtelAsIs")
-plot(BlueEtelAsIs, col="orange", main="BlueEtelAsIs")
-plot(RedEtelAsIs, col="purple", main="RedEtelAsIs")
-<<<<<<< HEAD
-
-=======
->>>>>>> 64ead25a7a64e91a2fa8df2659f00922228ca2ef
-plot(TotalPlan , col="black", main="TotalPlan")
-plot(EfakPlan , col="red",main="EfakPlan")
-plot(WugePlan, col="blue", main="WugePlan")
-plot(TotalEtelPlan, col="green",main="TotalEtelPlan")
-plot(BlueEtelPlan, col="orange", main="BlueEtelPlan")
-plot(RedEtelPlan, col="purple", main="RedEtelPlan")
-```
-
-<<<<<<< HEAD
-## Correlation Between As Is and Planned Data
-
-=======
-# Brian Portion: Test Correlation/Model
->>>>>>> 64ead25a7a64e91a2fa8df2659f00922228ca2ef
-```{r}
-cor(TotalAsIs, TotalPlan )
-cor(EfakAsIs , EfakPlan)
-cor(WugeAsIs, WugePlan)
-cor(TotalEtelAsIs, TotalEtelPlan)
-cor(BlueEtelAsIs , BlueEtelPlan)
-cor(RedEtelAsIs , RedEtelPlan)
-cor(YearAsIs, YearPlan)
-<<<<<<< HEAD
-
-=======
-TotalAsIs_lm <- lm(TotalAsIs ~ TotalPlan , data = TotalAsIs)
-summary(TotalAsIs_lm)
-
-TotalAsIs_tslm <- tslm(TotalAsIs ~ TotalPlan )
-summary(TotalAsIs_tslm)
-
-# National Holidays
-NationalHolidaysVector <- c(ImportedIndicators[170:181,2],ImportedIndicators[170:181,3],ImportedIndicators[170:181,4],ImportedIndicators[170:181,5],ImportedIndicators[170:181,6],ImportedIndicators[170:181,7])
-NationalHolidays <- ts(NationalHolidaysVector, start=c(2008,1), end=c(2013,12), frequency=12)
-plot(NationalHolidays, main="NationalHolidays")
-
-cor(TotalAsIs, NationalHolidays)
-cor(EfakAsIs , NationalHolidays)
-cor(WugeAsIs, NationalHolidays)
-cor(TotalEtelAsIs, NationalHolidays)
-cor(BlueEtelAsIs , NationalHolidays)
-cor(RedEtelAsIs , NationalHolidays)
-
-# The months April and December do not correlate well with the exports data. 
-# However later tests will show that these are worth considering. 
-# The missing correlation is just due to the sparse structure of the NationalHolidays time series.
->>>>>>> 64ead25a7a64e91a2fa8df2659f00922228ca2ef
-```
 
 # Tony's Portion: Forecasting Models
 ```{r}
